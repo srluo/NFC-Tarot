@@ -36,8 +36,10 @@
           if (!drawn.includes(card)) drawn.push(card);
         }
       } else {
-        const today = new Date().getDate();
-        drawn = [deck[today % deck.length]];
+        const now = new Date();
+        const seed = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
+        const index = Math.abs(seed ^ 0x5A5A5A) % deck.length;
+        drawn = [deck[index]];
       }
 
       const labels = ["過去", "現在", "未來"];
